@@ -13,4 +13,4 @@ def H_matrix(n, e, V):
     
 H = H_matrix(N, epsilon, V)
 
-print(H)
+eigenenergies, eigenvectors = np.linalg.eigh(H)
