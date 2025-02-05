@@ -1,0 +1,89 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper,margin=25mm,headsep=5mm,headheight=12pt]{geometry}
+\frenchspacing
+\usepackage{amsmath,amssymb,amsfonts,amsthm}  
+\usepackage{hyperref} 
+\hypersetup{
+    colorlinks, 
+    citecolor=black,
+    filecolor=black, 
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[separate-uncertainty=true]{siunitx} 
+\sisetup{
+  range-phrase=--,
+  detect-all,
+  output-decimal-marker={.},
+  range-units=single,
+  per-mode=reciprocal, 
+}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage[toc,acronym]{glossaries}
+\usepackage{booktabs} 
+\usepackage{fancyhdr} 
+\usepackage{lipsum}
+\usepackage{lastpage} 
+\usepackage{float} 
+\usepackage{listings} 
+\usepackage{comment} 
+\usepackage{tcolorbox}
+
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2em}
+
+\pagestyle{fancy}
+\fancyhead[L]{\footnotesize \textsc{\AuthorOne \ \AuthorTwo}}
+\fancyhead[R]{\footnotesize \textsc{\leftmark}}
+\fancyfoot[R]{ \thepage}
+\fancyfoot[C]{}
+\bibliographystyle{unsrt}
+
+% MY OWN PACKAGES
+
+
+\newcommand{\abs}[1]{\left| #1 \right|}
+
+\newcommand{\expectation}[1]{\left< #1 \right>}
+
+\newcommand{\scalar}[2]{\left< #1 | #2 \right> }
+
+\newcommand{\derivate}[2]{\frac{\partial #1}{\partial#2}}
+
+\newcommand{\expscalar}[2]{\left< #1 \left| #2\right| #1 \right>}
+
+\newcommand{\optscalar}[3]{\left< #1 \left| #2\right| #3 \right>}
+
+\newcommand{\set}[1]{\left\{#1 \right\}}
+
+\newcommand{\norm}[1]{\left\|\Vec{#1} \right\|}
+
+\newcommand{\expect}[1]{\left\langle #1 \right\rangle}
+
+\newcommand{\nuc}[2]{\text{${}^{#1}$#2}}
+
+\newcommand{\uvec}[1]{\mathbf{\hat{#1}}}
+
+
+\DeclareSIUnit\angstrom{\protect \text {Å}}
+
+\DeclareSIUnit\atomicmassunit{u}
+
+\newenvironment{question}
+  {\begin{tcolorbox}[colframe=white!50!black, colback=white!10!white, title=Question] }
+  {\end{tcolorbox}}           
+
+\newenvironment{answer}
+  {\begin{tcolorbox}[colframe=white!50!black, colback=white!10!white, title=Answer] }
+  {\end{tcolorbox}}           
+
+
+
+
