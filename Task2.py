@@ -66,6 +66,5 @@ plt.tight_layout()
 plt.show()
 
 
-plt.savefig("task2.pdf")
-
+plt.savefig("Comp_Proj1/Figures/task2.pdf")
 

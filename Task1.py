@@ -50,4 +50,4 @@ plt.legend()
 plt.grid()
 plt.show()
 
-plt.savefig("task1.pdf")
+plt.savefig("Comp_Proj1/Figures/task1.pdf")
