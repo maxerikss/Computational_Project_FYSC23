@@ -42,10 +42,12 @@ for site in LDOS_sites:
 # Plot LDOS for the selected sites
 plt.figure(figsize=(10, 6))
 for site in LDOS_sites:
-    plt.plot(energy_range, LDOS[site], label=f"Site {site}")
+    plt.plot(energy_range, LDOS[site], label=f"i={site}")
 plt.xlabel("Energy E")
-plt.ylabel("LDOS gL_i(E, Γ)")
+plt.ylabel(r"$g^L_{i}(E, \Gamma)$")
 plt.title("Local Density of States for Selected Sites")
 plt.legend()
 plt.grid()
 plt.show()
+
+plt.savefig("task1.pdf")
