@@ -1,51 +1,78 @@
 import numpy as np
-import matplotlib.pyplot as plt
+from scipy.sparse import csr_matrix
+from scipy.sparse.linalg import gmres
 
-N = 501         # Chain length
-V = -1          # Hopping term
-epsilon = 0     # On-site energy
-gamma = 0.05    # Broadening factor
-LDOS_sites = [1, 2, 3 , 5, 10, 50, 100, 251] 
-energy_range = np.linspace(-6, 6, 500)  # Energy range for LDOS calculation
+# Parameters
+Nl = 81  # Number of atoms along one side of the surface (Nl = 81)
+Ns = Nl**2  # Total number of atoms on the surface
+V0 = -1  # Hopping parameter
+epsilon = 0  # On-site energy
+Gamma = 0.05  # Small imaginary part for broadening
 
+# The Hamiltonian matrix initialization (sparse, to save memory)
+H = np.zeros((Ns, Ns), dtype=complex)
 
-def hamiltonian(n, e, V):
-    "Create a hamilitonian"
-    upper =  np.diag(V * np.ones(n-1), 1)
-    middle = np.diag(e * np.ones(n), 0)
-    lower = np.diag(V * np.ones(n-1), -1)
-    return upper + middle + lower
+# Function to convert (i, j) to matrix index m
+def coords_to_index(i, j, Nl, Np):
+    return Nl * (i + Np) + (j + Np)
 
-def sums(gamma, eigenvec, lamb, energy, eigenergy, site):
-    "Each term in the sum"
-    return (gamma / np.pi) * (eigenvec[site-1, lamb] ** 2) / ((energy - eigenergy[lamb])**2 + gamma**2)
+# Nearest-neighbor coordinates
+neighbors = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+
+# Constructing the Hamiltonian matrix H for the clean surface
+N_p = (Nl - 1) // 2  # The shift for i, j to the 1D matrix index
+for i in range(-N_p, N_p + 1):
+    for j in range(-N_p, N_p + 1):
+        m = coords_to_index(i, j, Nl, N_p)
+        # For each neighbor
+        for di, dj in neighbors:
+            ni, nj = i + di, j + dj
+            if -N_p <= ni <= N_p and -N_p <= nj <= N_p:  # Check if neighbor is within bounds
+                n = coords_to_index(ni, nj, Nl, N_p)
+                # Set the hopping terms (V0)
+                H[m, n] = V0
+
+# Convert the Hamiltonian matrix to a sparse format
+H_sparse = csr_matrix(H)
+
+# Define the LDOS calculation function using GMRES (iterative solver)
+def compute_ldos(H_sparse, sites, E, Gamma):
+    """
+    Compute the LDOS for given sites at energy E with broadening Gamma using GMRES.
+    """
+    Ns = H_sparse.shape[0]
+    identity_sparse = csr_matrix(np.eye(Ns))
     
-# Find the hamltonian
-H = hamiltonian(N, epsilon, V)
+    # Define the right-hand side (identity vector for Green's function calculation)
+    rhs = np.zeros(Ns, dtype=complex)
+    
+    ldos_values = {}
+    for site in sites:
+        m = coords_to_index(site[0], site[1], Nl, (Nl - 1)//2)
+        
+        # Calculate the Green's function using GMRES
+        # G(E) = (E - H + i*Gamma)^(-1)
+        A = E * identity_sparse - H_sparse + 1j * Gamma * identity_sparse
+        rhs[m] = 1  # Delta function for site m
+        
+        # Solve for the Green's function at site m using GMRES
+        solution, _ = gmres(A, rhs)
+        
+        # LDOS is the imaginary part of the Green's function diagonal element
+        ldos_values[site] = np.imag(solution[m])
+    
+    return ldos_values
 
-# Find eigenergies and eigenvectors
-eigenenergies, eigenvectors = np.linalg.eigh(H)
+# Sites for which we want to compute LDOS
+sites = [(0, 0), (0, 1), (1, 1), (2, 0), (2, 1), (2, 2)]
 
-# initlaize the LDOS as a dictonary
-LDOS = {site: np.zeros(len(energy_range)) for site in LDOS_sites}
+# Energy and broadening
+E = 0  # Energy at which we calculate LDOS
+Gamma = 0.05  # Broadening
 
-# Do the calculation for each site which we are intrested in
-for site in LDOS_sites:
-    # Make a loop where we look through each position with the energy at that poition 
-    for i, E in enumerate(energy_range):
-        # Calculate the sum
-        for lamb in range(N):
-            LDOS[site][i] += sums(gamma=gamma, eigenvec=eigenvectors, 
-                                  lamb=lamb, energy=E, 
-                                  eigenergy=eigenenergies, site=site)
+# Compute the LDOS at the specified sites
+ldos_values = compute_ldos(H_sparse, sites, E, Gamma)
 
-# Plot LDOS for the selected sites
-plt.figure(figsize=(10, 6))
-for site in LDOS_sites:
-    plt.plot(energy_range, LDOS[site], label=f"Site {site}")
-plt.xlabel("Energy E")
-plt.ylabel("LDOS gL_i(E, Γ)")
-plt.title("Local Density of States for Selected Sites")
-plt.legend()
-plt.grid()
-plt.show()
+# Output the computed LDOS values
+for site, ldos in ldos_values.items():
+    print(f"LDOS at site {site}: {ldos}")
