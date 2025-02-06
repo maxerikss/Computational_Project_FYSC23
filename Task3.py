@@ -44,6 +44,7 @@ def compute_ldos(H_sparse, sites, E, Gamma):
     Ns = H_sparse.shape[0]
     identity_sparse = csr_matrix(np.eye(Ns))
     
+    
     # Define the right-hand side (identity vector for Green's function calculation)
     rhs = np.zeros(Ns, dtype=complex)
     
