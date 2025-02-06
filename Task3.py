@@ -2,7 +2,7 @@ import numpy as np
 from scipy.sparse import csr_matrix
 from scipy.sparse.linalg import gmres
 
-# Parameters
+# Parameters 
 Nl = 81  # Number of atoms along one side of the surface (Nl = 81)
 Ns = Nl**2  # Total number of atoms on the surface
 V0 = -1  # Hopping parameter
