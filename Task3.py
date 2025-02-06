@@ -3,14 +3,15 @@ from scipy.sparse import csr_matrix
 from scipy.sparse.linalg import gmres
 
 # Parameters 
-Nl = 81  # Number of atoms along one side of the surface (Nl = 81)
-Ns = Nl**2  # Total number of atoms on the surface
-V0 = -1  # Hopping parameter
-epsilon = 0  # On-site energy
-Gamma = 0.05  # Small imaginary part for broadening
+Nl = 81         # Number of atoms along one side of the surface (Nl = 81)
+Ns = Nl**2      # Total number of atoms on the surface
+V0 = -1         # Hopping parameter
+epsilon = 0     # On-site energy
+Gamma = 0.05    # Small imaginary part for broadening
+E = 0           # Energy at which we calculate LDOS
 
-# The Hamiltonian matrix initialization (sparse, to save memory)
-H = np.zeros((Ns, Ns), dtype=complex)
+# Intiliaze the Hamiltonian
+H = np.zeros((Ns, Ns))
 
 # Function to convert (i, j) to matrix index m
 def coords_to_index(i, j, Nl, Np):
@@ -20,7 +21,7 @@ def coords_to_index(i, j, Nl, Np):
 neighbors = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
 # Constructing the Hamiltonian matrix H for the clean surface
-N_p = (Nl - 1) // 2  # The shift for i, j to the 1D matrix index
+N_p = round((Nl - 1) / 2)  # The shift for i, j to the 1D matrix index
 for i in range(-N_p, N_p + 1):
     for j in range(-N_p, N_p + 1):
         m = coords_to_index(i, j, Nl, N_p)
@@ -33,7 +34,7 @@ for i in range(-N_p, N_p + 1):
                 H[m, n] = V0
 
 # Convert the Hamiltonian matrix to a sparse format
-H_sparse = csr_matrix(H)
+H = csr_matrix(H)
 
 # Define the LDOS calculation function using GMRES (iterative solver)
 def compute_ldos(H_sparse, sites, E, Gamma):
@@ -66,12 +67,8 @@ def compute_ldos(H_sparse, sites, E, Gamma):
 # Sites for which we want to compute LDOS
 sites = [(0, 0), (0, 1), (1, 1), (2, 0), (2, 1), (2, 2)]
 
-# Energy and broadening
-E = 0  # Energy at which we calculate LDOS
-Gamma = 0.05  # Broadening
-
 # Compute the LDOS at the specified sites
-ldos_values = compute_ldos(H_sparse, sites, E, Gamma)
+ldos_values = compute_ldos(H, sites, E, Gamma)
 
 # Output the computed LDOS values
 for site, ldos in ldos_values.items():
