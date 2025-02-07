@@ -2,8 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 N = 501         # Chain length
-V = -1          # Hopping term
-epsilon = 0     # On-site energy
+V = -1          # Energy at neigbhour
+epsilon = 0     # Energy at site
 gamma = 0.05    # Broadening factor
 LDOS_sites = [1, 2, 3 , 5, 10, 50, 100, 251] 
 energy_range = np.linspace(-6, 6, 500)  # Energy range for LDOS calculation
