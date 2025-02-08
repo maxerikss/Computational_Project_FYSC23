@@ -20,10 +20,10 @@ def hamiltonian(N, epsilon, V):
 
     return H
 
-def lorentzian(E_values, E_lambda, Gamma):
+def sums(E_values, E_lambda, Gamma):
     return (Gamma / np.pi) / ((E_values - E_lambda) ** 2 + Gamma ** 2)
 
-def compute_ldos(H, sites, E_range=(-6, 6), Gamma=0.05, num_points=500):
+def compute_LDOS(H, sites, E_range=(-6, 6), Gamma=0.05, num_points=500):
     
     start_time = time.time() # Benchmarking
     
@@ -34,16 +34,15 @@ def compute_ldos(H, sites, E_range=(-6, 6), Gamma=0.05, num_points=500):
     
     for site in sites:
         for lambda_idx in range(len(eigenvalues)):
-            ldos[site] += (np.abs(eigenvectors[site, lambda_idx])**2) * lorentzian(E_values, eigenvalues[lambda_idx], Gamma)
+            ldos[site] += (np.abs(eigenvectors[site, lambda_idx])**2) * sums(E_values, eigenvalues[lambda_idx], Gamma)
     
     end_time = time.time()
     print(f"LDOS computation time: {end_time - start_time:.4f} seconds")
     
     return E_values, ldos
 
-
 H = hamiltonian(N, epsilon, V)
-E_values, LDOS = compute_ldos(H, LDOS_sites, Gamma=gamma)
+E_values, LDOS = compute_LDOS(H, LDOS_sites, Gamma=gamma)
 
 # Plot LDOS for the selected sites
 plt.figure(figsize=(10, 6))
