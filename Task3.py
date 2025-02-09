@@ -4,33 +4,37 @@ from scipy.sparse.linalg import spsolve, splu
 import matplotlib.pyplot as plt
 
 # Parameters
-Nl = 81        # Number of atoms along one side of the square surface
-Ns = Nl**2     # Total number of atoms on the surface
+Nl = 81        # Nr of atoms along one side 
+Ns = Nl**2     # Total number of atoms 
+Nh = (Nl + 1) // 2
+Nhp = (Nl - 1) // 2
+
 V0 = -1        # Hopping parameter
 epsilon = 0    # On-site energy
 Gamma = 0.05   # Small imaginary part for broadening
 
-# Define conversion from (i, j) to matrix index m
-def coords_to_index(i, j, Nl):
-    Nh = (Nl + 1) // 2  # Nh = (Nl+1)/2
-    return Nl * (i + Nh - 1) + (j + Nh - 1)
+
+# Define conversion from (i', j') to matrix index m
+def coords_to_index(i, j):
+    ibar = i+Nhp
+    jbar = j+Nhp
+    return Nl*(ibar-1) + jbar
 
 # Define nearest neighbors
-def get_neighbors(i, j, Nl):
+def get_neighbors(i, j):
     neighbors = [(i-1, j), (i+1, j), (i, j-1), (i, j+1)]
-    valid_neighbors = [(ni, nj) for ni, nj in neighbors if -((Nl-1)//2) <= ni <= ((Nl-1)//2) and -((Nl-1)//2) <= nj <= ((Nl-1)//2)]
+    valid_neighbors = [(ni, nj) for ni, nj in neighbors if -Nhp <= ni <= Nhp and -Nhp <= nj <= Nhp]
     return valid_neighbors
 
 # Construct Hamiltonian matrix H
 H = csr_matrix((Ns, Ns), dtype=complex).tolil()
-N_p = (Nl - 1) // 2  # N'_h = (Nl-1)/2
 
-for i in range(-N_p, N_p + 1):
-    for j in range(-N_p, N_p + 1):
-        m = coords_to_index(i, j, Nl)
+for i in range(-Nhp, Nhp + 1):
+    for j in range(-Nhp, Nhp + 1):
+        m = coords_to_index(i, j)
         H[m, m] = epsilon  # On-site energy
-        for ni, nj in get_neighbors(i, j, Nl):
-            n = coords_to_index(ni, nj, Nl)
+        for ni, nj in get_neighbors(i, j):
+            n = coords_to_index(ni, nj)
             H[m, n] = V0  # Nearest neighbor hopping
 
 # Convert to CSR format for fast operations
@@ -52,7 +56,7 @@ for E in E_values:
     
     for site in sites:
         rhs = np.zeros(Ns, dtype=complex)
-        m = coords_to_index(site[0], site[1], Nl)
+        m = coords_to_index(site[0], site[1])
         rhs[m] = 1  # Delta function at site m
         solution = lu_solver.solve(rhs)
         ldos_results[site].append(-np.imag(solution[m]) / np.pi)  # Include -1/pi factor
