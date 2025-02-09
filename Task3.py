@@ -1,76 +1,69 @@
 import numpy as np
-from scipy.sparse import csr_matrix
-from scipy.sparse.linalg import gmres
+from scipy.sparse import csr_matrix, eye
+from scipy.sparse.linalg import spsolve, splu
+import matplotlib.pyplot as plt
 
-# Parameters 
-Nl = 81         # Number of atoms along one side of the surface (Nl = 81)
-Ns = Nl**2      # Total number of atoms on the surface
-V0 = -1         # Hopping parameter
-epsilon = 0     # On-site energy
-Gamma = 0.05    # Small imaginary part for broadening
-E = 0           # Energy at which we calculate LDOS
+# Parameters
+Nl = 81        # Number of atoms along one side of the square surface
+Ns = Nl**2     # Total number of atoms on the surface
+V0 = -1        # Hopping parameter
+epsilon = 0    # On-site energy
+Gamma = 0.05   # Small imaginary part for broadening
 
-# Intiliaze the Hamiltonian
-H = np.zeros((Ns, Ns))
+# Define conversion from (i, j) to matrix index m
+def coords_to_index(i, j, Nl):
+    Nh = (Nl + 1) // 2  # Nh = (Nl+1)/2
+    return Nl * (i + Nh - 1) + (j + Nh - 1)
 
-# Function to convert (i, j) to matrix index m
-def coords_to_index(i, j, Nl, Np):
-    return Nl * (i + Np) + (j + Np)
+# Define nearest neighbors
+def get_neighbors(i, j, Nl):
+    neighbors = [(i-1, j), (i+1, j), (i, j-1), (i, j+1)]
+    valid_neighbors = [(ni, nj) for ni, nj in neighbors if -((Nl-1)//2) <= ni <= ((Nl-1)//2) and -((Nl-1)//2) <= nj <= ((Nl-1)//2)]
+    return valid_neighbors
 
-# Nearest-neighbor coordinates
-neighbors = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+# Construct Hamiltonian matrix H
+H = csr_matrix((Ns, Ns), dtype=complex).tolil()
+N_p = (Nl - 1) // 2  # N'_h = (Nl-1)/2
 
-# Constructing the Hamiltonian matrix H for the clean surface
-N_p = round((Nl - 1) / 2)  # The shift for i, j to the 1D matrix index
 for i in range(-N_p, N_p + 1):
     for j in range(-N_p, N_p + 1):
-        m = coords_to_index(i, j, Nl, N_p)
-        # For each neighbor
-        for di, dj in neighbors:
-            ni, nj = i + di, j + dj
-            if -N_p <= ni <= N_p and -N_p <= nj <= N_p:  # Check if neighbor is within bounds
-                n = coords_to_index(ni, nj, Nl, N_p)
-                # Set the hopping terms (V0)
-                H[m, n] = V0
+        m = coords_to_index(i, j, Nl)
+        H[m, m] = epsilon  # On-site energy
+        for ni, nj in get_neighbors(i, j, Nl):
+            n = coords_to_index(ni, nj, Nl)
+            H[m, n] = V0  # Nearest neighbor hopping
 
-# Convert the Hamiltonian matrix to a sparse format
-H = csr_matrix(H)
+# Convert to CSR format for fast operations
+H_sparse = H.tocsr()
 
-# Define the LDOS calculation function using GMRES (iterative solver)
-def compute_ldos(H_sparse, sites, E, Gamma):
-    """
-    Compute the LDOS for given sites at energy E with broadening Gamma using GMRES.
-    """
-    Ns = H_sparse.shape[0]
-    identity_sparse = csr_matrix(np.eye(Ns))
-    
-    
-    # Define the right-hand side (identity vector for Green's function calculation)
-    rhs = np.zeros(Ns, dtype=complex)
-    
-    ldos_values = {}
-    for site in sites:
-        m = coords_to_index(site[0], site[1], Nl, (Nl - 1)//2)
-        
-        # Calculate the Green's function using GMRES
-        # G(E) = (E - H + i*Gamma)^(-1)
-        A = E * identity_sparse - H_sparse + 1j * Gamma * identity_sparse
-        rhs[m] = 1  # Delta function for site m
-        
-        # Solve for the Green's function at site m using GMRES
-        solution, _ = gmres(A, rhs)
-        
-        # LDOS is the imaginary part of the Green's function diagonal element
-        ldos_values[site] = np.imag(solution[m])
-    
-    return ldos_values
-
-# Sites for which we want to compute LDOS
+# Define sites of interest
 sites = [(0, 0), (0, 1), (1, 1), (2, 0), (2, 1), (2, 2)]
 
-# Compute the LDOS at the specified sites
-ldos_values = compute_ldos(H, sites, E, Gamma)
+# Energy range for LDOS plot
+E_values = np.linspace(-8, 8, 200)
+ldos_results = {site: [] for site in sites}
 
-# Output the computed LDOS values
-for site, ldos in ldos_values.items():
-    print(f"LDOS at site {site}: {ldos}")
+# Precompute LU decomposition for fast solving
+identity_sparse = eye(Ns, format='csr')
+
+for E in E_values:
+    A = (E * identity_sparse - H_sparse + 1j * Gamma * identity_sparse).tocsc()
+    lu_solver = splu(A)  # Compute LU decomposition
+    
+    for site in sites:
+        rhs = np.zeros(Ns, dtype=complex)
+        m = coords_to_index(site[0], site[1], Nl)
+        rhs[m] = 1  # Delta function at site m
+        solution = lu_solver.solve(rhs)
+        ldos_results[site].append(-np.imag(solution[m]) / np.pi)  # Include -1/pi factor
+
+# Plot LDOS
+plt.figure(figsize=(8,6))
+for site in sites:
+    plt.plot(E_values, ldos_results[site], label=f"Site {site}")
+plt.xlabel("Energy E")
+plt.ylabel("LDOS gL(E, Γ)")
+plt.title("Local Density of States (LDOS) vs Energy")
+plt.legend()
+plt.grid()
+plt.show()
