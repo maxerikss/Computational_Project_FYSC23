@@ -56,6 +56,7 @@ plt.ylabel(r"$g^L_{i}(E, \Gamma)$")
 plt.title("Local Density of States for Selected Sites")
 plt.legend()
 plt.grid()
-plt.show()
 
 plt.savefig("Comp_Proj1/Figures/task1.pdf")
+plt.show()
+

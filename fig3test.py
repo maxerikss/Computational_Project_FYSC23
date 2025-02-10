@@ -12,11 +12,11 @@ from scipy.sparse import csr_matrix
 import time  # Import the time module to measure execution time
 
 
-Nl = 81        # Lattice size along one dimension
+Nl = 3        # Lattice size along one dimension
 Ns = Nl**2     
 Nh = (Nl + 1) // 2
 Nhp = (Nl - 1) // 2
-energy_range = np.linspace(-8, 8, 200)
+energy_range = np.linspace(-8, 8, 1000)
 V = -1         # Hopping parameter
 epsilon = 0    # On-site energy
 gamma = 0.05   # Broadening factor
@@ -81,9 +81,9 @@ def hamiltonian_adsorbate(Ns, epsilon, V, adsorbate_type, epsilon_0, V_0, Nhp=Nh
     elif adsorbate_type == "bridge":
         m1 = coord_to_index(0, 0)
         m2 = coord_to_index(1, 0)
-        H[m1, adsorbate] = V_0 / np.sqrt(2)
+        #H[m1, adsorbate] = V_0 / np.sqrt(2)
         H[m2, adsorbate] = V_0 / np.sqrt(2)
-        H[adsorbate, m1] = V_0 / np.sqrt(2)
+        #H[adsorbate, m1] = V_0 / np.sqrt(2)
         H[adsorbate, m2] = V_0 / np.sqrt(2)
     
     elif adsorbate_type == "center":
@@ -130,85 +130,28 @@ def compute_LDOS(H, energy_range, Ns=Ns, LDOS_site = (0,0)):
     return LDOS
 
 
-#%%
-
-start_time = time.time()
 
 
 # Clean surface LDOS
 clean = compute_LDOS(hamiltonian(Ns, epsilon, V), 
                      energy_range)  
 
-# Adsorbate cases 1
-atop1 = compute_LDOS(hamiltonian_adsorbate(Ns, epsilon, V, "atop", -2, -1.3),
-                     energy_range)
-
-bridge1 = compute_LDOS(hamiltonian_adsorbate(Ns, epsilon, V, "bridge", -2, -1.3),
-                     energy_range)
-
-center1 = compute_LDOS(hamiltonian_adsorbate(Ns, epsilon, V, "center", -2, -1.3),
-                     energy_range)
-
-impurity1 =  compute_LDOS(hamiltonian_adsorbate(Ns, epsilon, V, "impurity", -2, -1.3),
-                     energy_range)
-
-# Adsorbate cases 2
-atop2 = compute_LDOS(hamiltonian_adsorbate(Ns, epsilon, V, "atop", -2, -5),
-                     energy_range)
-
-bridge2 = compute_LDOS(hamiltonian_adsorbate(Ns, epsilon, V, "bridge", -2, -5),
-                     energy_range)
-
-center2 = compute_LDOS(hamiltonian_adsorbate(Ns, epsilon, V, "center", -2, -5),
-                     energy_range)
-
-impurity2 =  compute_LDOS(hamiltonian_adsorbate(Ns, epsilon, V, "impurity", -2, -5),
+# bridge
+bridge = compute_LDOS(hamiltonian_adsorbate(Ns, epsilon, V, "bridge", -2, -1.3),
                      energy_range)
 
 
-# End time measurement
-end_time = time.time()
+plt.title("Local Density of States With Adsorbates for Site (0,0)")
 
-# Print the total time taken
-print(f"Total time taken: {np.round((end_time - start_time)/60,1)} minutes")
-
+plt.plot(energy_range, clean, label="clean", c='black')
+plt.plot(energy_range, bridge, label="bridge", c='red')
 
 
-#%%
-
-fig, axes = plt.subplots(2, 1, figsize=(8, 8))
-fig.suptitle("Local Density of States With Adsorbates for Site (0,0)")
-
-# For the first case 
-axes[0].set_title(r"$\epsilon_0=-1, V_0=-1.3$")
-
-axes[0].plot(energy_range, clean, label="clean")
-axes[0].plot(energy_range, atop1, label="atop")
-axes[0].plot(energy_range, bridge1, label="bridge")
-axes[0].plot(energy_range, center1, label="center")
-axes[0].plot(energy_range, impurity1, label="impurity")
-
-axes[0].set_ylabel(r"$g^L_{i}(E, \Gamma)$")
-axes[0].legend()
-axes[0].grid()
-
-# For the second case 
-axes[1].set_title(r"$\epsilon_0=-1, V_0=-1.3$")
-
-axes[1].plot(energy_range, clean, label="clean")
-axes[1].plot(energy_range, atop2, label="atop")
-axes[1].plot(energy_range, bridge2, label="bridge")
-axes[1].plot(energy_range, center2, label="center")
-axes[1].plot(energy_range, impurity2, label="impurity")
-
-axes[1].set_ylabel(r"$g^L_{i}(E, \Gamma)$")
-axes[1].legend()
-axes[1].grid()
-
-
-# Set common x-axis
-axes[1].set_xlabel("Energy E")
+plt.ylabel(r"$g^L_{i}(E, \Gamma)$")
+plt.ylim(0,4)
+plt.legend()
+plt.grid()
+plt.xlabel("Energy E")
 plt.tight_layout()
 
-plt.savefig("Comp_Proj1/Figures/task4.pdf")
 plt.show()

@@ -398,6 +398,11 @@ INPUT ./Textfiles/Part4.tex
 INPUT ./Textfiles/Part4.tex
 INPUT ./Textfiles/Part4.tex
 INPUT Textfiles/Part4.tex
+INPUT ./Figures/task4.pdf
+INPUT ./Figures/task4.pdf
+INPUT ./Figures/task4.pdf
+INPUT ./Figures/task4.pdf
+INPUT ./Figures/task4.pdf
 INPUT ./Textfiles/Appendix.tex
 INPUT ./Textfiles/Appendix.tex
 OUTPUT .output/Textfiles/Appendix.aux

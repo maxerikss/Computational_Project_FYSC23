@@ -67,9 +67,9 @@ def sums(gamma, eigenvecs, lamb, energy, eigvals, site):
 
 def compute_LDOS(LDOS_sites, energy_range, H):
     "Compute the Local Density of States (LDOS)."
-    
+
     # Find eigenenergies and eigenvectors
-    eigenenergy, eigenvectors = np.linalg.eigh(H.toarray())  # Convert sparse matrix to dense calculation
+    eigenenergy, eigenvectors = np.linalg.eigh(H.toarray()) # Convert sparse matrix to dense calculation
     
     # Initialize LDOS as a dictionary
     LDOS = {site: np.zeros(len(energy_range)) for site in LDOS_sites}
@@ -82,7 +82,7 @@ def compute_LDOS(LDOS_sites, energy_range, H):
                 LDOS[site][i] += sums(gamma=gamma, eigenvecs=eigenvectors, 
                                       lamb=lamb, energy=E, 
                                       eigvals=eigenenergy, site=site_index)
-    return LDOS
+    return LDOS 
 
 # Compute Hamiltonian and LDOS
 H = hamiltonian(Ns, epsilon, V)
@@ -97,7 +97,7 @@ plt.ylabel(r"$g^L_{i}(E, \Gamma)$")
 plt.title(f"Local Density of States for Selected Sites with $\epsilon={epsilon}, V={V}$")
 plt.legend()
 plt.grid()
-plt.show()
 
-plt.savefig("Comp_Proj1/Figures/task3.pdf")
+#plt.savefig("Comp_Proj1/Figures/task4.pdf")
+plt.show()
 
