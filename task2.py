@@ -1,17 +1,25 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Feb 10 10:28:49 2025
+
+@author: fredrik
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 
 N = 501         # Chain length
-V = -1          # Energy at neigbhour
+V = -1          # Hopping term
 epsilon = 0     # Energy at site
 gamma = 0.05    # Broadening factor
-LDOS_sites = [1, 2, 3, 5, 10, 50, 100, 251] 
-energy_range = np.linspace(-6, 6, 500)  # Energy range for LDOS calculation
+LDOS_sites = [1, 2, 3, 5, 10, 50, 100, 251] # Sites we want to plot
+energy_range = np.linspace(-6, 6, 1000)  # Energy range for LDOS calculation
 
-def hamiltonian(n, e, V, e0, v0):
+def hamiltonian(n, epsilon, V, e0, v0):
     "Create a Hamiltonian"
     upper = np.diag(V * np.ones(n-1), 1)
-    middle = np.diag(e * np.ones(n), 0)
+    middle = np.diag(epsilon * np.ones(n), 0)
     lower = np.diag(V * np.ones(n-1), -1)
     H = upper + middle + lower
     H[0, -1] = v0
@@ -44,7 +52,7 @@ def compute_LDOS(LDOS_sites, energy_range, H):
 param_list = [(-1, 0), (-1, -0.3), (-1, -3)]
 
 # Create figure with 3 subplots
-fig, axes = plt.subplots(3, 1, figsize=(8, 9), sharey=True)
+fig, axes = plt.subplots(3, 1, figsize=(8, 9))
 fig.suptitle("Local Density of States for Selected Sites")
 
 # Loop over different parameter sets and plot in subplots
@@ -61,10 +69,13 @@ for idx, (e0, v0) in enumerate(param_list):
     axes[idx].grid()
 
 # Set common x-axis
+axes[0].set_ylim(0, .8)
+axes[1].set_ylim(0, .8)
+axes[2].set_ylim(0, 3.2)
 axes[2].set_xlabel("Energy E")
 plt.tight_layout()
-plt.show()
-
 
 plt.savefig("Comp_Proj1/Figures/task2.pdf")
+plt.show()
+
 

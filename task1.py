@@ -1,18 +1,26 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Feb 10 10:28:49 2025
+
+@author: fredrik
+"""
+
 N = 501         # Chain length
-V = -1          # Energy at neigbhour
+V = -1          # Hopping term
 epsilon = 0     # Energy at site
 gamma = 0.05    # Broadening factor
-LDOS_sites = [1, 2, 3 , 5, 10, 50, 100, 251] 
+LDOS_sites = [1, 2, 3, 5, 10, 50, 100, 251] # Sites we want to plot
 energy_range = np.linspace(-6, 6, 500)  # Energy range for LDOS calculation
 
 
-def hamiltonian(n, e, V):
+def hamiltonian(n, epsilon, V):
     "Create a hamilitonian"
     upper =  np.diag(V * np.ones(n-1), 1)
-    middle = np.diag(e * np.ones(n), 0)
+    middle = np.diag(epsilon * np.ones(n), 0)
     lower = np.diag(V * np.ones(n-1), -1)
     return upper + middle + lower
 

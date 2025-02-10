@@ -388,6 +388,11 @@ INPUT ./Textfiles/Part3.tex
 INPUT Textfiles/Part3.tex
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm0800.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/eccc0800.tfm
+INPUT ./Figures/task3.pdf
+INPUT ./Figures/task3.pdf
+INPUT ./Figures/task3.pdf
+INPUT ./Figures/task3.pdf
+INPUT ./Figures/task3.pdf
 INPUT ./Textfiles/Part4.tex
 INPUT ./Textfiles/Part4.tex
 INPUT ./Textfiles/Part4.tex

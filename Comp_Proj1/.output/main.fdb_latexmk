@@ -1,8 +1,8 @@
 # Fdb version 4
-["pdflatex"] 1738944834.82922 "/home/fredrik/Documents/Physics Lund/Term 6/FYSC23/Computational_Project_FYSC23/Comp_Proj1/main.tex" ".output/main.pdf" "main" 1738944835.7687 0
-  ".output/Textfiles/Appendix.aux" 1738944835.64906 1005 bd1e6181deb4900128d6592849d49ef7 "pdflatex"
-  ".output/main.aux" 1738944835.65006 1233 28fc307436d7ba2d5bdabb088741234f "pdflatex"
-  ".output/main.out" 1738944835.65106 336 fd016778784fe81e22529cc311b9c552 "pdflatex"
+["pdflatex"] 1739182924.10754 "/home/fredrik/Documents/Physics Lund/Term 6/FYSC23/Computational_Project_FYSC23/Comp_Proj1/main.tex" ".output/main.pdf" "main" 1739182924.96753 0
+  ".output/Textfiles/Appendix.aux" 1739182924.886 1005 6dceee65684587af5a0513ff8fa1539d "pdflatex"
+  ".output/main.aux" 1739182924.887 1549 ec06a5062c7f15496569cb2abc3c1c36 "pdflatex"
+  ".output/main.out" 1739182924.887 461 9e2a8c4095b5da27cbbb1628a06575b3 "pdflatex"
   "/etc/texmf/web2c/texmf.cnf" 1732548902.53758 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/fredrik/Documents/Physics Lund/Term 6/FYSC23/Computational_Project_FYSC23/Comp_Proj1/main.tex" 1738849023.37794 472 8c7c1284c74678b58e287f79a79f5ee7 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -201,14 +201,15 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1732548954 8213821 17cddad2c49ccf63e58ec66c69761292 ""
   "Figures/Lund logo.png" 1738849023.37794 212781 5cb164115b79ef7e65f3efce6a8f1da5 ""
   "Figures/task1.pdf" 1738849255.46065 25712 5d3021c67ca0761e7edf087eed7df9a8 ""
-  "Figures/task2.pdf" 1738850453.5723 37734 8dceaaa922a99da94d88d4ee5ff74f30 ""
+  "Figures/task2.pdf" 1739182874.38139 49737 c2aa2478f6c7455dbe51d9bbd62fa499 ""
+  "Figures/task3.pdf" 1739182120.31462 22396 c6c0f7b5ac31026840619a488a345630 ""
   "Other/Information.tex" 1738944694.83799 515 704b8199af8024d22824f45ca3411af4 ""
   "Other/Premable.tex" 1738849023.37794 2024 4e1dbb1ee978a5b0d61054b68a03489d ""
-  "Other/Title.tex" 1738849023.37794 787 73533d8665221aed7e67c7bc47cde224 ""
+  "Other/Title.tex" 1738944903.43257 788 e5aa408519dec1a088622645a8e0b22e ""
   "Textfiles/Appendix.tex" 1738849023.37894 0 d41d8cd98f00b204e9800998ecf8427e ""
   "Textfiles/Part1.tex" 1738944824.31197 200 f4d38bcb2465180dabce5462794a411f ""
   "Textfiles/Part2.tex" 1738944828.241 182 da4bc8290509ac3ab2d7cc4b3e303b66 ""
-  "Textfiles/Part3.tex" 1738849023.37894 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "Textfiles/Part3.tex" 1739181753.64414 181 75ab8f4e06ef8075c225a0def7631df1 ""
   "Textfiles/Part4.tex" 1738849023.37794 0 d41d8cd98f00b204e9800998ecf8427e ""
   "main.tex" 1738849023.37794 472 8c7c1284c74678b58e287f79a79f5ee7 ""
   (generated)
