@@ -105,7 +105,7 @@ def hamiltonian_adsorbate(Ns, epsilon, V, adsorbate_type, epsilon_0, V_0, Nhp=Nh
 
 def sums(gamma, eigenvecs, lamb, energy, eigvals, site):
     "Compute each term in the LDOS sum."
-    return (gamma / np.pi) * (np.abs(eigenvecs[site, lamb])**2) / ((energy - eigvals[lamb])**2 + gamma**2)
+    return (gamma/np.pi) * (np.abs(eigenvecs[site,lamb])**2) / ((energy-eigvals[lamb])**2 + gamma**2)
 
 
 def compute_LDOS(H, energy_range, Ns=Ns, LDOS_site = (0,0)):
@@ -115,14 +115,14 @@ def compute_LDOS(H, energy_range, Ns=Ns, LDOS_site = (0,0)):
     H = H.toarray()   
 
     # Find eigenenergies and eigenvectors
-    eigenenergy, eigenvectors = np.linalg.eigh(H)  # Directly call on dense matrix
-    
+    eigenenergy, eigenvectors = np.linalg.eigh(H)  
+
     # Initialize LDOS as a dictionary
     LDOS = np.zeros(len(energy_range))
     
     # Compute LDOS 
     site_index = coord_to_index(LDOS_site[0], LDOS_site[1])
-    
+
     for i, E in enumerate(energy_range):
             for lamb in range(Ns):
                 LDOS[i] += sums(gamma=gamma, eigenvecs=eigenvectors, 
@@ -131,15 +131,13 @@ def compute_LDOS(H, energy_range, Ns=Ns, LDOS_site = (0,0)):
     return LDOS
 
 
-
 # Clean surface LDOS
 clean = compute_LDOS(hamiltonian(Ns, epsilon, V), 
                      energy_range)  
 
 # bridge
-bridge = compute_LDOS(hamiltonian_adsorbate(Ns, epsilon, V, "bridge", -1, -1.3),
-                     energy_range)
-
+H = hamiltonian_adsorbate(Ns, epsilon, V, "bridge", -2, -1.3)
+bridge = compute_LDOS(H, energy_range)
 
 
 plt.figure(figsize=(10, 5))
@@ -157,6 +155,6 @@ plt.tight_layout()
 
 plt.show()
  
+print(hamiltonian_adsorbate(Ns, epsilon, V, "bridge", -2, -1.3*np.sqrt(2)).toarray())
 
 
-print(hamiltonian_adsorbate(Ns, 1, 2, "bridge", 3, 4*np.sqrt(2)).toarray()  )
