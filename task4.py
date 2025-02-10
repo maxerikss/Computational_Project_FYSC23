@@ -9,7 +9,7 @@ Created on Mon Feb 10 11:29:10 2025
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.sparse import csr_matrix
-import time  # Import the time module to measure execution time
+import time  
 
 
 Nl = 81        # Lattice size along one dimension
@@ -26,7 +26,7 @@ def coord_to_index(i, j, Nhp=Nhp, Nl=Nl):
     """ Convert (i', j') coordinates to matrix index m. """
     ibar = i + Nhp
     jbar = j + Nhp
-    return Nl*(ibar-1) + jbar
+    return Nl*ibar + jbar
 
 def get_neighbors(i, j):
     "This function check if there are any neighbors nearby that exsists"
@@ -166,10 +166,7 @@ impurity2 =  compute_LDOS(hamiltonian_adsorbate(Ns, epsilon, V, "impurity", -2, 
                      energy_range)
 
 
-# End time measurement
 end_time = time.time()
-
-# Print the total time taken
 print(f"Total time taken: {np.round((end_time - start_time)/60,1)} minutes")
 
 

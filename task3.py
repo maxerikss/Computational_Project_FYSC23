@@ -9,6 +9,10 @@ Created on Mon Feb 10 10:51:38 2025
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.sparse import csr_matrix
+import time  
+
+start_time = time.time()
+
 
 Nl = 81        # Lattice size along one dimension
 Ns = Nl**2     # Total number of atoms
@@ -29,7 +33,7 @@ def coord_to_index(i, j):
     "This was done by the method provided"
     ibar = i + Nhp 
     jbar = j + Nhp
-    return Nl*(ibar-1) + jbar
+    return Nl*ibar + jbar
 
 
 def get_neighbors(i, j):
@@ -50,10 +54,10 @@ def get_neighbors(i, j):
 def hamiltonian(Ns, epsilon, V):
     "Construct the Hamiltonian matrix for a 2D square lattice."
     H = csr_matrix((Ns, Ns), dtype=complex).tolil()
+    H.setdiag([epsilon] * (Ns+1))    
     for i in range(-Nhp, Nhp + 1):
         for j in range(-Nhp, Nhp + 1):
             m = coord_to_index(i, j)
-            H[m, m] = epsilon  # On-site energy
             for ni, nj in get_neighbors(i, j):
                 n = coord_to_index(ni, nj)
                 H[m, n] = V  # Nearest-neighbor hopping
@@ -98,6 +102,9 @@ plt.title(f"Local Density of States for Selected Sites with $\epsilon={epsilon},
 plt.legend()
 plt.grid()
 
-#plt.savefig("Comp_Proj1/Figures/task4.pdf")
+plt.savefig("Comp_Proj1/Figures/task3.pdf")
 plt.show()
 
+
+end_time = time.time()
+print(f"Total time taken: {np.round((end_time - start_time)/60,1)} minutes")
