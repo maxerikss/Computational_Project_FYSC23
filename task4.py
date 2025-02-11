@@ -16,7 +16,7 @@ Nl = 81                                 # Lattice size along one dimension
 Ns = Nl**2     
 Nh = (Nl+1) // 2
 Nhp = (Nl-1) // 2
-energy_range = np.linspace(-8, 8, 400)  # Energy range
+energy_range = np.linspace(-8, 8, 1000)  # Energy range
 V = -1                                  # Hopping parameter
 epsilon = 0                             # On-site energy
 gamma = 0.05                            # Broadening factor
@@ -108,7 +108,7 @@ def sums(gamma, eigenvecs, lamb, energy, eigvals, site):
     return (gamma / np.pi) * (np.abs(eigenvecs[site, lamb]) ** 2) / ((energy - eigvals[lamb])**2 + gamma**2)
 
 
-def compute_LDOS(H, energy_range, Ns=Ns, clean=False):
+def compute_LDOS(H, energy_range, Ns=Ns, center=False):
     "Compute the Local Density of States (LDOS)."
     
     # convert to dense array
@@ -121,7 +121,7 @@ def compute_LDOS(H, energy_range, Ns=Ns, clean=False):
     LDOS = np.zeros(len(energy_range))
     
     #Check position of paticle
-    if clean == True:
+    if center == True:
         site_index = coord_to_index(0, 0)
     else:
         site_index = Ns
@@ -140,7 +140,7 @@ start_time = time.time()
 
 # Clean surface LDOS
 clean = compute_LDOS(hamiltonian(Ns, epsilon, V), 
-                     energy_range, clean=True)  
+                     energy_range, center=True)  
 
 # Adsorbate cases 1
 atop1 = compute_LDOS(hamiltonian_adsorbate(Ns, epsilon, V, "atop", -2, -1.3),
@@ -153,7 +153,7 @@ center1 = compute_LDOS(hamiltonian_adsorbate(Ns, epsilon, V, "center", -2, -1.3)
                      energy_range)
 
 impurity1 =  compute_LDOS(hamiltonian_adsorbate(Ns, epsilon, V, "impurity", -2, -1.3),
-                     energy_range)
+                     energy_range, center=True)
 
 # Adsorbate cases 2
 atop2 = compute_LDOS(hamiltonian_adsorbate(Ns, epsilon, V, "atop", -2, -5),
@@ -166,7 +166,7 @@ center2 = compute_LDOS(hamiltonian_adsorbate(Ns, epsilon, V, "center", -2, -5),
                      energy_range)
 
 impurity2 =  compute_LDOS(hamiltonian_adsorbate(Ns, epsilon, V, "impurity", -2, -5),
-                     energy_range)
+                     energy_range, center=True)
 
 
 end_time = time.time()
