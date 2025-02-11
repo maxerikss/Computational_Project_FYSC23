@@ -12,14 +12,14 @@ from scipy.sparse import csr_matrix
 import time  
 
 
-Nl = 81        # Lattice size along one dimension
+Nl = 81                                 # Lattice size along one dimension
 Ns = Nl**2     
 Nh = (Nl + 1) // 2
 Nhp = (Nl - 1) // 2
-energy_range = np.linspace(-8, 8, 200)
-V = -1         # Hopping parameter
-epsilon = 0    # On-site energy
-gamma = 0.05   # Broadening factor
+energy_range = np.linspace(-8, 8, 200)  # Energy range
+V = -1                                  # Hopping parameter
+epsilon = 0                             # On-site energy
+gamma = 0.05                            # Broadening factor
 
 
 def coord_to_index(i, j, Nhp=Nhp, Nl=Nl):
@@ -188,9 +188,10 @@ axes[0].plot(energy_range, impurity1, label="impurity")
 axes[0].set_ylabel(r"$g^L_{i}(E, \Gamma)$")
 axes[0].legend()
 axes[0].grid()
+#axes[0].set_ylim(0,0.4)
 
 # For the second case 
-axes[1].set_title(r"$\epsilon_0=-1, V_0=-1.3$")
+axes[1].set_title(r"$\epsilon_0=-1, V_0=-5$")
 
 axes[1].plot(energy_range, clean, label="clean")
 axes[1].plot(energy_range, atop2, label="atop")
@@ -201,6 +202,8 @@ axes[1].plot(energy_range, impurity2, label="impurity")
 axes[1].set_ylabel(r"$g^L_{i}(E, \Gamma)$")
 axes[1].legend()
 axes[1].grid()
+#axes[1].set_ylim(0,0.4)
+
 
 
 # Set common x-axis

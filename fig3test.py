@@ -14,8 +14,8 @@ import time  # Import the time module to measure execution time
 
 Nl = 3        # Lattice size along one dimension
 Ns = Nl**2     
-Nh = (Nl + 1) // 2
-Nhp = (Nl - 1) // 2
+Nh = (Nl+1) // 2
+Nhp = (Nl-1) // 2
 energy_range = np.linspace(-8, 8, 1000)
 V = -1         # Hopping parameter
 epsilon = 0    # On-site energy
@@ -26,7 +26,7 @@ def coord_to_index(i, j, Nhp=Nhp, Nl=Nl):
     """ Convert (i', j') coordinates to matrix index m. """
     ibar = i + Nhp
     jbar = j + Nhp
-    return Nl*ibar + jbar
+    return Nl*(ibar) + jbar
 
 def get_neighbors(i, j):
     "This function check if there are any neighbors nearby that exsists"
@@ -136,7 +136,9 @@ clean = compute_LDOS(hamiltonian(Ns, epsilon, V),
                      energy_range)  
 
 # bridge
-H = hamiltonian_adsorbate(Ns, epsilon, V, "bridge", -2, -1.3)
+H = hamiltonian_adsorbate(Ns, epsilon, V, 
+                          "bridge", epsilon_0=-2, V_0=-1.3)
+
 bridge = compute_LDOS(H, energy_range)
 
 
@@ -155,6 +157,6 @@ plt.tight_layout()
 
 plt.show()
  
-print(hamiltonian_adsorbate(Ns, epsilon, V, "bridge", -2, -1.3*np.sqrt(2)).toarray())
+print(np.round(H,1).toarray())
 
 
