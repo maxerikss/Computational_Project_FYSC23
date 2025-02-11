@@ -115,7 +115,7 @@ def compute_LDOS(H, energy_range, Ns=Ns, LDOS_site = (0,0)):
     H_dense = H.toarray()   
 
     # Find eigenenergies and eigenvectors
-    eigenenergy, eigenvectors = np.linalg.eigh(H_dense)  # Directly call on dense matrix
+    eigenenergy, eigenvectors = np.linalg.eig(H_dense)  # Directly call on dense matrix
     
     # Initialize LDOS as a dictionary
     LDOS = np.zeros(len(energy_range))

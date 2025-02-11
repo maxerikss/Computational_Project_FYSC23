@@ -73,7 +73,7 @@ def compute_LDOS(LDOS_sites, energy_range, H):
     "Compute the Local Density of States (LDOS)."
 
     # Find eigenenergies and eigenvectors
-    eigenenergy, eigenvectors = np.linalg.eigh(H.toarray()) # Convert sparse matrix to dense calculation
+    eigenenergy, eigenvectors = np.linalg.eig(H.toarray()) # Convert sparse matrix to dense calculation
     
     # Initialize LDOS as a dictionary
     LDOS = {site: np.zeros(len(energy_range)) for site in LDOS_sites}

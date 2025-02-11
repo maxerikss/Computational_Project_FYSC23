@@ -9,8 +9,6 @@ Created on Mon Feb 10 11:29:10 2025
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.sparse import csr_matrix
-import time  # Import the time module to measure execution time
-
 
 Nl = 3        # Lattice size along one dimension
 Ns = Nl**2     
@@ -115,7 +113,7 @@ def compute_LDOS(H, energy_range, Ns=Ns, LDOS_site = (0,0)):
     H = H.toarray()   
 
     # Find eigenenergies and eigenvectors
-    eigenenergy, eigenvectors = np.linalg.eigh(H)  
+    eigenenergy, eigenvectors = np.linalg.eig(H)  
 
     # Initialize LDOS as a dictionary
     LDOS = np.zeros(len(energy_range))
@@ -155,8 +153,10 @@ plt.grid()
 plt.xlabel("Energy E")
 plt.tight_layout()
 
+plt.savefig("Comp_Proj1/Figures/fig3test.pdf")
 plt.show()
- 
+
+print("The Hamiltonian for Bridge:")
 print(np.round(H,1).toarray())
 
 

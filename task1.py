@@ -32,7 +32,7 @@ def sums(gamma, eigenvec, lamb, energy, eigenergy, site):
 H = hamiltonian(N, epsilon, V)
 
 # Find eigenergies and eigenvectors
-eigenenergies, eigenvectors = np.linalg.eigh(H)
+eigenenergies, eigenvectors = np.linalg.eig(H)
 
 # initlaize the LDOS as a dictonary
 LDOS = {site: np.zeros(len(energy_range)) for site in LDOS_sites}
