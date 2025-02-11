@@ -14,8 +14,8 @@ import time
 
 Nl = 81                                 # Lattice size along one dimension
 Ns = Nl**2     
-Nh = (Nl + 1) // 2
-Nhp = (Nl - 1) // 2
+Nh = (Nl+1) // 2
+Nhp = (Nl-1) // 2
 energy_range = np.linspace(-8, 8, 200)  # Energy range
 V = -1                                  # Hopping parameter
 epsilon = 0                             # On-site energy
@@ -108,7 +108,7 @@ def sums(gamma, eigenvecs, lamb, energy, eigvals, site):
     return (gamma / np.pi) * (np.abs(eigenvecs[site, lamb]) ** 2) / ((energy - eigvals[lamb])**2 + gamma**2)
 
 
-def compute_LDOS(H, energy_range, Ns=Ns, LDOS_site = (1,2), clean=False):
+def compute_LDOS(H, energy_range, Ns=Ns, clean=False):
     "Compute the Local Density of States (LDOS)."
     
     # convert to dense array
@@ -140,7 +140,7 @@ start_time = time.time()
 
 # Clean surface LDOS
 clean = compute_LDOS(hamiltonian(Ns, epsilon, V), 
-                     energy_range)  
+                     energy_range, clean=True)  
 
 # Adsorbate cases 1
 atop1 = compute_LDOS(hamiltonian_adsorbate(Ns, epsilon, V, "atop", -2, -1.3),
