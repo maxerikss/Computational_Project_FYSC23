@@ -1,8 +1,8 @@
 # Fdb version 4
-["pdflatex"] 1739281228.16657 "/home/fredrik/Documents/Physics Lund/Term 6/FYSC23/Computational_Project_FYSC23/Comp_Proj1/main.tex" ".output/main.pdf" "main" 1739281228.89117 0
-  ".output/Textfiles/Appendix.aux" 1739281228.81638 1005 e6f22f9f4f825054a648b23fe48896ee "pdflatex"
-  ".output/main.aux" 1739281228.81638 2172 5fda517b0683a847d26632d867f1d47b "pdflatex"
-  ".output/main.out" 1739281228.81738 672 9402e0afecbcd9d7a19bf075c495a7f6 "pdflatex"
+["pdflatex"] 1739287168.2323 "/home/fredrik/Documents/Physics Lund/Term 6/FYSC23/Computational_Project_FYSC23/Comp_Proj1/main.tex" ".output/main.pdf" "main" 1739287169.10584 0
+  ".output/Textfiles/Appendix.aux" 1739287168.98511 1005 e6f22f9f4f825054a648b23fe48896ee "pdflatex"
+  ".output/main.aux" 1739287168.98611 2172 5fda517b0683a847d26632d867f1d47b "pdflatex"
+  ".output/main.out" 1739287168.98711 672 9402e0afecbcd9d7a19bf075c495a7f6 "pdflatex"
   "/etc/texmf/web2c/texmf.cnf" 1732548902.53758 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/fredrik/Documents/Physics Lund/Term 6/FYSC23/Computational_Project_FYSC23/Comp_Proj1/main.tex" 1738849023.37794 472 8c7c1284c74678b58e287f79a79f5ee7 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -203,8 +203,8 @@
   "Figures/task1.pdf" 1739277564.93096 25712 c048ca6838d8e98efc129874ddf554ba ""
   "Figures/task2.pdf" 1739277543.32978 49737 43a783ba377bc2bf77acddb4eb449712 ""
   "Figures/task3.pdf" 1739277831.42327 24337 72da8d910556e4bd6a48c7f05b54ba10 ""
-  "Figures/task4(1).pdf" 1739281227.81737 35736 a65e801b865d127470f533f755f294ad ""
-  "Figures/task4.pdf" 1739281210.84813 28005 f68c36f25bf9d86e21e8ef694892c003 ""
+  "Figures/task4(1).pdf" 1739287167.86101 50190 bf504605a9a298d8d9e92ec733f34790 ""
+  "Figures/task4.pdf" 1739287134.12029 36248 25b8be2ff77a504aafde02f10fd15a67 ""
   "Other/Information.tex" 1738944694.83799 515 704b8199af8024d22824f45ca3411af4 ""
   "Other/Premable.tex" 1738849023.37794 2024 4e1dbb1ee978a5b0d61054b68a03489d ""
   "Other/Title.tex" 1738944903.43257 788 e5aa408519dec1a088622645a8e0b22e ""
