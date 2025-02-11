@@ -108,27 +108,30 @@ def sums(gamma, eigenvecs, lamb, energy, eigvals, site):
     return (gamma / np.pi) * (np.abs(eigenvecs[site, lamb]) ** 2) / ((energy - eigvals[lamb])**2 + gamma**2)
 
 
-def compute_LDOS(H, energy_range, Ns=Ns, LDOS_site = (0,0)):
+def compute_LDOS(H, energy_range, Ns=Ns, LDOS_site = (1,2), clean=False):
     "Compute the Local Density of States (LDOS)."
     
     # convert to dense array
-    H_dense = H.toarray()   
+    H = H.toarray()   
 
     # Find eigenenergies and eigenvectors
-    eigenenergy, eigenvectors = np.linalg.eig(H_dense)  # Directly call on dense matrix
-    
+    eigenenergy, eigenvectors = np.linalg.eigh(H)  
+
     # Initialize LDOS as a dictionary
     LDOS = np.zeros(len(energy_range))
     
-    # Compute LDOS 
-    site_index = coord_to_index(LDOS_site[0], LDOS_site[1])
+    #Check position of paticle
+    if clean == True:
+        site_index = coord_to_index(0, 0)
+    else:
+        site_index = Ns
+
     for i, E in enumerate(energy_range):
             for lamb in range(Ns):
                 LDOS[i] += sums(gamma=gamma, eigenvecs=eigenvectors, 
                                       lamb=lamb, energy=E, 
                                       eigvals=eigenenergy, site=site_index)
     return LDOS
-
 
 #%%
 

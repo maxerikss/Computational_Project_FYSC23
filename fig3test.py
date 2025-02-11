@@ -113,7 +113,7 @@ def compute_LDOS(H, energy_range, Ns=Ns, LDOS_site = (0,0)):
     H = H.toarray()   
 
     # Find eigenenergies and eigenvectors
-    eigenenergy, eigenvectors = np.linalg.eig(H)  
+    eigenenergy, eigenvectors = np.linalg.eigh(H)  
 
     # Initialize LDOS as a dictionary
     LDOS = np.zeros(len(energy_range))
@@ -128,10 +128,34 @@ def compute_LDOS(H, energy_range, Ns=Ns, LDOS_site = (0,0)):
                                       eigvals=eigenenergy, site=site_index)
     return LDOS
 
+def compute_LDOS(H, energy_range, Ns=Ns, LDOS_site = (1,2), clean=False):
+    "Compute the Local Density of States (LDOS)."
+    
+    # convert to dense array
+    H = H.toarray()   
+
+    # Find eigenenergies and eigenvectors
+    eigenenergy, eigenvectors = np.linalg.eigh(H)  
+
+    # Initialize LDOS as a dictionary
+    LDOS = np.zeros(len(energy_range))
+    
+    if clean == True:
+        site_index = coord_to_index(0, 0)
+    else:
+        site_index = Ns
+
+    for i, E in enumerate(energy_range):
+            for lamb in range(Ns):
+                LDOS[i] += sums(gamma=gamma, eigenvecs=eigenvectors, 
+                                      lamb=lamb, energy=E, 
+                                      eigvals=eigenenergy, site=site_index)
+    return LDOS
+
 
 # Clean surface LDOS
 clean = compute_LDOS(hamiltonian(Ns, epsilon, V), 
-                     energy_range)  
+                     energy_range, clean=True)  
 
 # bridge
 H = hamiltonian_adsorbate(Ns, epsilon, V, 

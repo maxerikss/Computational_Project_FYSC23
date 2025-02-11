@@ -34,7 +34,7 @@ def sums(gamma, eigenvec, lamb, energy, eigenergy, site):
 def compute_LDOS(LDOS_sites, energy_range, H):
     "Function for fining the LDOS"
     # Find eigenenergies and eigenvectors
-    eigenenergies, eigenvectors = np.linalg.eig(H)
+    eigenenergies, eigenvectors = np.linalg.eigh(H)
 
     # Initialize LDOS as a dictionary
     LDOS = {site: np.zeros(len(energy_range)) for site in LDOS_sites}
