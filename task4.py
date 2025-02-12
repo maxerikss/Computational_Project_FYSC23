@@ -182,7 +182,7 @@ fig.suptitle("Local Density of States With Adsorbates for Site (0,0)")
 # For the first case 
 axes[0].set_title(r"$\epsilon_0=-1, V_0=-1.3$")
 
-axes[0].plot(energy_range, clean, label="clean", c='black', linestyle='--')
+axes[0].plot(energy_range, clean, label="clean", c='black', linestyle=':')
 axes[0].plot(energy_range, atop1, label="atop")
 axes[0].plot(energy_range, bridge1, label="bridge")
 axes[0].plot(energy_range, center1, label="center")
@@ -196,7 +196,7 @@ axes[0].grid()
 # For the second case 
 axes[1].set_title(r"$\epsilon_0=-1, V_0=-5$")
 
-axes[1].plot(energy_range, clean, label="clean", c='black', linestyle='--')
+axes[1].plot(energy_range, clean, label="clean", c='black', linestyle=':')
 axes[1].plot(energy_range, atop2, label="atop")
 axes[1].plot(energy_range, bridge2, label="bridge")
 axes[1].plot(energy_range, center2, label="center")
