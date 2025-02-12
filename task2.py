@@ -13,7 +13,7 @@ N = 501         # Chain length
 V = -1          # Hopping term
 epsilon = 0     # Energy at site
 gamma = 0.05    # Broadening factor
-LDOS_sites = [1, 2, 3, 5, 10, 50, 100, 251] # Sites we want to plot
+LDOS_sites = [0, 1, 2, 3, 5, 10, 50, 100, 251] # Sites we want to plot
 energy_range = np.linspace(-6, 6, 1000)  # Energy range for LDOS calculation
 
 def hamiltonian(n, epsilon, V, e0, v0):
@@ -69,9 +69,9 @@ for idx, (e0, v0) in enumerate(param_list):
     axes[idx].grid()
 
 # Set common x-axis
-axes[0].set_ylim(0, .8)
-axes[1].set_ylim(0, .8)
-axes[2].set_ylim(0, 3.2)
+axes[0].set_ylim(0, 1.25)
+axes[1].set_ylim(0, 1.5)
+axes[2].set_ylim(0, 3.5)
 axes[2].set_xlabel("Energy E")
 plt.tight_layout()
 

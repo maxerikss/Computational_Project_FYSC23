@@ -385,6 +385,7 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1000.tfm
 INPUT ./Textfiles/Part2.tex
 INPUT ./Textfiles/Part2.tex
 INPUT ./Textfiles/Part2.tex
@@ -395,13 +396,13 @@ INPUT ./Figures/task2.pdf
 INPUT ./Figures/task2.pdf
 INPUT ./Figures/task2.pdf
 INPUT ./Figures/task2.pdf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm0800.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/eccc0800.tfm
 INPUT ./Textfiles/Part3.tex
 INPUT ./Textfiles/Part3.tex
 INPUT ./Textfiles/Part3.tex
 INPUT ./Textfiles/Part3.tex
 INPUT Textfiles/Part3.tex
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm0800.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/eccc0800.tfm
 INPUT ./Figures/task3.pdf
 INPUT ./Figures/task3.pdf
 INPUT ./Figures/task3.pdf
@@ -436,7 +437,9 @@ INPUT .output/main.out
 INPUT .output/main.out
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfbx2074.pfb
