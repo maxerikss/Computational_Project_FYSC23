@@ -208,7 +208,6 @@ axes[1].grid()
 #axes[1].set_ylim(0,0.4)
 
 
-
 # Set common x-axis
 axes[1].set_xlabel("Energy E")
 plt.tight_layout()

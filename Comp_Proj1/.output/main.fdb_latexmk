@@ -1,8 +1,8 @@
 # Fdb version 4
-["pdflatex"] 1739362435.19369 "/home/fredrik/Documents/Physics Lund/Term 6/FYSC23/Computational_Project_FYSC23/Comp_Proj1/main.tex" ".output/main.pdf" "main" 1739362436.00389 0
-  ".output/Textfiles/Appendix.aux" 1739362435.90638 1005 e6f22f9f4f825054a648b23fe48896ee "pdflatex"
-  ".output/main.aux" 1739362435.90738 2684 aa6224142894b6061a46e392bccc36f0 "pdflatex"
-  ".output/main.out" 1739362435.90738 672 9402e0afecbcd9d7a19bf075c495a7f6 "pdflatex"
+["pdflatex"] 1739364671.54732 "/home/fredrik/Documents/Physics Lund/Term 6/FYSC23/Computational_Project_FYSC23/Comp_Proj1/main.tex" ".output/main.pdf" "main" 1739364672.46311 0
+  ".output/Textfiles/Appendix.aux" 1739364672.38665 1598 bdeb17630d76067a67273b80aeb51f94 "pdflatex"
+  ".output/main.aux" 1739364672.38665 2688 c7432ae2f399fe5529e32c699366c7e5 "pdflatex"
+  ".output/main.out" 1739364672.38765 1288 07a9faa5b0c5404f0eda5398099d647a "pdflatex"
   "/etc/texmf/web2c/texmf.cnf" 1732548902.53758 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/fredrik/Documents/Physics Lund/Term 6/FYSC23/Computational_Project_FYSC23/Comp_Proj1/main.tex" 1738849023.37794 472 8c7c1284c74678b58e287f79a79f5ee7 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -19,6 +19,7 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm1440.tfm" 1136768653 3584 3169d30142b88a27d4ab0e3468e963a2 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm2074.tfm" 1136768653 3584 8e2870ec7aa9776f59654942b0923f51 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecti1200.tfm" 1136768653 3072 8b5a64dc91775463bc95e2d818524028 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ectt1000.tfm" 1136768653 1536 06717a2b50de47d4087ac0e6cd759455 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ectt1200.tfm" 1136768653 1536 487c9b46984a816c7ed238d0674595c7 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1246382020 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -210,6 +211,7 @@
   "/usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb" 1636152094 138258 6525c253f16cededa14c7fd0da7f67b2 ""
   "/usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb" 1732548918.02563 136101 f533469f523533d38317ab5729d00c8a ""
   "/usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb" 1732548918.10163 198221 ca5aa71411090ef358a6cc78b7458365 ""
+  "/usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb" 1636152094 169201 9ebf99020dde51a5086e186761a34e8f ""
   "/usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb" 1732548918.10963 167085 68de377d2744a68a88fa40a1f610615a ""
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1732548924.46665 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
@@ -223,7 +225,7 @@
   "Other/Information.tex" 1739288488.09508 619 47b457611d2cfd75fdbfb9a9bfcc16ba ""
   "Other/Premable.tex" 1739288510.49744 2037 611c868dcadea0df6fe594689d6218fd ""
   "Other/Title.tex" 1739288488.09508 860 b7b5ba723807391f2753084028bba9fc ""
-  "Textfiles/Appendix.tex" 1738849023.37894 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "Textfiles/Appendix.tex" 1739364670.32562 16580 524079fcb4712fb0c7b168184aa42388 ""
   "Textfiles/Part1.tex" 1739362434.11236 571 1e90e663698dacc0beb98224863f2b06 ""
   "Textfiles/Part2.tex" 1739362434.11336 1906 f25c43d1f24c2c1ecc7a03a6887a8b24 ""
   "Textfiles/Part3.tex" 1739197721.76902 200 82a8824bae7d97de90ad58961b8e4ae7 ""
